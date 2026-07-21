@@ -386,7 +386,7 @@
             <button type="button" id="bowSizeIncreaseBtn" style="width:28px; height:28px; border-radius:50%; background:var(--cream-deep); color:var(--rose-deep); font-weight:800;">+</button>
           </span>
         </label>
-        <input type="range" id="bowSizeSlider" min="60" max="160" value="100" style="width:100%; margin-top:8px;">
+        <input type="range" id="bowSizeSlider" min="60" max="260" value="100" style="width:100%; margin-top:8px;">
       </div>
     </div>
 
@@ -2507,7 +2507,7 @@ function initBowControls(){
   const plusBtn = document.getElementById('bowSizeIncreaseBtn');
 
   function setBowSize(value){
-    state.bowScale = Math.max(60, Math.min(160, parseInt(value) || 100));
+    state.bowScale = Math.max(60, Math.min(260, parseInt(value) || 100));
     if(slider) slider.value = state.bowScale;
     renderStage();
   }
