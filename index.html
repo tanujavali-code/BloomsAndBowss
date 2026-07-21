@@ -1200,6 +1200,119 @@ function makeLeaf(color='#5B8A5F', variant='simple'){
   `);
 }
 
+/* --- Bluebell (single bell bloom on a spike) --- */
+function makeBluebell(color){
+  const dark = shade(color,-0.2);
+  return svgWrap(`
+    <path d="M50 18 C46 30 44 44 46 60 C48 70 52 70 54 60 C56 44 54 30 50 18 Z" fill="${color}"/>
+    <path d="M50 28 C45 30 43 39 44 48 C45 54 49 53 50 53 C51 53 55 54 56 48 C57 39 55 30 50 28 Z" fill="${shade(color,0.25)}"/>
+    <line x1="50" y1="18" x2="50" y2="88" stroke="#4E6E54" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="50" cy="34" r="3" fill="${dark}"/>
+  `);
+}
+
+/* --- Geranium (rounded clustered bloom) --- */
+function makeGeranium(color){
+  const dark = shade(color,-0.2);
+  return svgWrap(`
+    <g transform="translate(0 4)">
+      <path d="M50 24 C42 24 36 30 36 40 C36 62 44 68 50 74 C56 68 64 62 64 40 C64 30 58 24 50 24 Z" fill="${color}"/>
+      <path d="M50 30 C44 34 42 46 44 58 C46 62 50 63 50 63 C50 63 54 62 56 58 C58 46 56 34 50 30 Z" fill="${shade(color,0.25)}"/>
+      <circle cx="50" cy="48" r="4" fill="${dark}"/>
+    </g>
+  `);
+}
+
+/* --- Begonia (asymmetrical layered petals) --- */
+function makeBegonia(color){
+  const dark=shade(color,-0.2), light=shade(color,0.28);
+  return svgWrap(`
+    <path d="M50 18 C40 24 38 42 44 56 C48 64 54 66 58 60 C64 48 64 28 50 18 Z" fill="${color}"/>
+    <path d="M50 24 C44 28 42 40 46 50 C48 56 52 57 54 52 C58 40 58 28 50 24 Z" fill="${light}"/>
+    <circle cx="50" cy="44" r="5" fill="${dark}"/>
+  `);
+}
+
+/* --- Azalea (bushy clustered blossom) --- */
+function makeAzalea(color){
+  const dark=shade(color,-0.2);
+  return svgWrap(`
+    <path d="M50 22 C40 26 38 38 42 50 C44 56 48 58 50 58 C52 58 56 56 58 50 C62 38 60 26 50 22 Z" fill="${color}"/>
+    <path d="M50 30 C44 32 42 40 44 48 C45 52 48 53 50 53 C52 53 55 52 56 48 C58 40 56 32 50 30 Z" fill="${shade(color,0.25)}"/>
+    <circle cx="50" cy="42" r="4" fill="${dark}"/>
+  `);
+}
+
+/* --- Hollyhock (tall, open 5-petal bloom) --- */
+function makeHollyhock(color){
+  const dark=shade(color,-0.2), light=shade(color,0.25);
+  return svgWrap(`
+    <path d="M50 20 C38 26 34 40 38 56 C40 64 46 68 50 68 C54 68 60 64 62 56 C66 40 62 26 50 20 Z" fill="${color}"/>
+    <path d="M50 28 C44 32 42 44 44 54 C45 58 48 60 50 60 C52 60 55 58 56 54 C58 44 56 32 50 28 Z" fill="${light}"/>
+    <circle cx="50" cy="44" r="5" fill="${dark}"/>
+  `);
+}
+
+/* --- Lisianthus (soft ruffled petals) --- */
+function makeLisianthus(color){
+  const dark=shade(color,-0.2), light=shade(color,0.3);
+  return svgWrap(`
+    <path d="M50 20 C44 24 42 36 46 48 C48 54 52 56 54 52 C58 40 58 28 50 20 Z" fill="${color}"/>
+    <path d="M50 24 C46 28 44 38 46 46 C47 50 49 52 50 52 C51 52 53 50 54 46 C56 38 54 28 50 24 Z" fill="${light}"/>
+    <circle cx="50" cy="40" r="4" fill="${dark}"/>
+  `);
+}
+
+/* --- Pansy (face-like bloom) --- */
+function makePansy(color){
+  const dark=shade(color,-0.2), light=shade(color,0.35);
+  return svgWrap(`
+    <path d="M50 18 C44 20 40 28 40 38 C40 46 44 50 50 54 C56 50 60 46 60 38 C60 28 56 20 50 18 Z" fill="${color}"/>
+    <path d="M50 25 C46 28 44 34 44 40 C44 44 46 46 50 48 C54 46 56 44 56 40 C56 34 54 28 50 25 Z" fill="${light}"/>
+    <circle cx="50" cy="40" r="4" fill="${dark}"/>
+  `);
+}
+
+/* --- Ixia (starry clustered flower) --- */
+function makeIxia(color){
+  const dark=shade(color,-0.2);
+  return svgWrap(`
+    <path d="M50 22 C44 26 44 36 48 44 C50 50 50 56 50 56 C50 56 50 50 52 44 C56 36 56 26 50 22 Z" fill="${color}"/>
+    <path d="M50 24 C47 28 47 36 48 42 C49 46 50 48 50 48 C50 48 51 46 52 42 C53 36 53 28 50 24 Z" fill="${shade(color,0.25)}"/>
+    <circle cx="50" cy="40" r="4" fill="${dark}"/>
+  `);
+}
+
+/* --- Primrose (cup-shaped bloom) --- */
+function makePrimrose(color){
+  const dark=shade(color,-0.2), light=shade(color,0.25);
+  return svgWrap(`
+    <path d="M50 18 C42 20 36 28 36 40 C36 46 40 52 46 56 C48 58 50 60 50 60 C50 60 52 58 54 56 C60 52 64 46 64 40 C64 28 58 20 50 18 Z" fill="${color}"/>
+    <path d="M50 26 C45 28 42 34 42 40 C42 44 44 48 50 50 C56 48 58 44 58 40 C58 34 55 28 50 26 Z" fill="${light}"/>
+    <circle cx="50" cy="42" r="4" fill="${dark}"/>
+  `);
+}
+
+/* --- Crocus (three-petal cup bloom) --- */
+function makeCrocus(color){
+  const dark=shade(color,-0.2);
+  return svgWrap(`
+    <path d="M50 20 C42 26 40 38 44 48 C46 52 50 54 50 54 C50 54 54 52 56 48 C60 38 58 26 50 20 Z" fill="${color}"/>
+    <path d="M50 28 C45 32 44 38 46 44 C47 46 48 48 50 48 C52 48 53 46 54 44 C56 38 55 32 50 28 Z" fill="${shade(color,0.25)}"/>
+    <circle cx="50" cy="42" r="4" fill="${dark}"/>
+  `);
+}
+
+/* --- Fuchsia (dangling elegant bloom) --- */
+function makeFuchsia(color){
+  const dark=shade(color,-0.2), light=shade(color,0.25);
+  return svgWrap(`
+    <path d="M50 20 C42 24 40 36 44 50 C46 56 50 60 50 60 C50 60 54 56 56 50 C60 36 58 24 50 20 Z" fill="${color}"/>
+    <path d="M50 26 C46 30 44 40 46 46 C47 50 49 52 50 52 C51 52 53 50 54 46 C56 40 54 30 50 26 Z" fill="${light}"/>
+    <circle cx="50" cy="40" r="4" fill="${dark}"/>
+  `);
+}
+
 /* ---------------------------------------------------------------------
    2. FLOWER CATALOG — 50+ entries with color variants
 --------------------------------------------------------------------- */
@@ -1349,6 +1462,31 @@ const FLOWER_CATALOG = [
   {id:'wildflower_pink', name:'Pink Wildflower', cat:'Other', svg:()=>makeWildflower6('#E8879A')},
   {id:'wildflower_purple', name:'Purple Wildflower', cat:'Other', svg:()=>makeWildflower6('#8B6BB1')},
   {id:'wildflower_orange', name:'Orange Wildflower', cat:'Other', svg:()=>makeWildflower6('#E8712B')},
+
+  // Extra distinct flower types for a much larger picker
+  {id:'bluebell_blue', name:'Bluebell', cat:'Other', svg:()=>makeBluebell('#3E6FA8')},
+  {id:'bluebell_violet', name:'Violet Bluebell', cat:'Other', svg:()=>makeBluebell('#7A5A9E')},
+  {id:'geranium_red', name:'Geranium', cat:'Other', svg:()=>makeGeranium('#C4243B')},
+  {id:'geranium_hotpink', name:'Hot Pink Geranium', cat:'Other', svg:()=>makeGeranium('#E85C93')},
+  {id:'begonia_coral', name:'Begonia', cat:'Other', svg:()=>makeBegonia('#E8712B')},
+  {id:'begonia_magenta', name:'Magenta Begonia', cat:'Other', svg:()=>makeBegonia('#B1276B')},
+  {id:'azalea_pink', name:'Azalea', cat:'Other', svg:()=>makeAzalea('#E8879A')},
+  {id:'azalea_orange', name:'Orange Azalea', cat:'Other', svg:()=>makeAzalea('#E8712B')},
+  {id:'hollyhock_red', name:'Hollyhock', cat:'Other', svg:()=>makeHollyhock('#D6203A')},
+  {id:'hollyhock_purple', name:'Purple Hollyhock', cat:'Other', svg:()=>makeHollyhock('#8B6BB1')},
+  {id:'lisianthus_lilac', name:'Lisianthus', cat:'Other', svg:()=>makeLisianthus('#B79FD1')},
+  {id:'lisianthus_rose', name:'Rose Lisianthus', cat:'Other', svg:()=>makeLisianthus('#E8879A')},
+  {id:'pansy_violet', name:'Pansy', cat:'Other', svg:()=>makePansy('#7A5A9E')},
+  {id:'pansy_blue', name:'Blue Pansy', cat:'Other', svg:()=>makePansy('#3E6FA8')},
+  {id:'ixia_orange', name:'Ixia', cat:'Other', svg:()=>makeIxia('#E8712B')},
+  {id:'ixia_yellow', name:'Golden Ixia', cat:'Other', svg:()=>makeIxia('#F2C230')},
+  {id:'primrose_yellow', name:'Primrose', cat:'Other', svg:()=>makePrimrose('#F2C230')},
+  {id:'primrose_orange', name:'Orange Primrose', cat:'Other', svg:()=>makePrimrose('#E8712B')},
+  {id:'crocus_purple', name:'Crocus', cat:'Other', svg:()=>makeCrocus('#8B6BB1')},
+  {id:'crocus_blue', name:'Blue Crocus', cat:'Other', svg:()=>makeCrocus('#3E6FA8')},
+  {id:'fuchsia_magenta', name:'Fuchsia', cat:'Other', svg:()=>makeFuchsia('#B1276B')},
+  {id:'fuchsia_pink', name:'Pink Fuchsia', cat:'Other', svg:()=>makeFuchsia('#E8879A')},
+  {id:'fuchsia_violet', name:'Violet Fuchsia', cat:'Other', svg:()=>makeFuchsia('#7A5A9E')},
 
   // Extra color variants across existing species for more range
   {id:'rose_coral', name:'Coral Rose', cat:'Rose', svg:()=>makeRose('#E85C4A')},
