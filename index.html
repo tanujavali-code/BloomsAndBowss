@@ -1983,8 +1983,7 @@ function renderStage(){
     }
   }
 
-  // bow — sits at the collar where the flowers meet the wrapper, draggable
-  // just like a flower so it can be nudged into place.
+  // bow — stays fixed at its chosen position and only changes size.
   if(state.bowId){
     const b = BOW_CATALOG.find(x=>x.id===state.bowId);
     if(b){
@@ -2489,28 +2488,40 @@ function renderBowSelection(){
       state.bowId = state.bowId===card.dataset.id ? null : card.dataset.id;
       renderBowSelection();
       renderStage();
-      document.getElementById('bowSizeControl').style.display = state.bowId ? 'block' : 'none';
+      const bowSizeControl = document.getElementById('bowSizeControl');
+      if(bowSizeControl) bowSizeControl.style.display = state.bowId ? 'block' : 'none';
       if(state.bowId) showToast('Bow tied on! 🎀');
     });
   });
-  document.getElementById('bowSizeControl').style.display = state.bowId ? 'block' : 'none';
-}
-function setBowSize(value){
-  state.bowScale = Math.max(60, Math.min(160, parseInt(value) || 100));
-  const slider = document.getElementById('bowSizeSlider');
-  if(slider) slider.value = state.bowScale;
-  renderStage();
+  const bowSizeControl = document.getElementById('bowSizeControl');
+  if(bowSizeControl) bowSizeControl.style.display = state.bowId ? 'block' : 'none';
 }
 
-document.getElementById('bowSizeSlider').addEventListener('input', (e)=>{
-  setBowSize(e.target.value);
-});
-document.getElementById('bowSizeDecreaseBtn').addEventListener('click', ()=>{
-  setBowSize(state.bowScale - 10);
-});
-document.getElementById('bowSizeIncreaseBtn').addEventListener('click', ()=>{
-  setBowSize(state.bowScale + 10);
-});
+let bowControlsInitialized = false;
+function initBowControls(){
+  if(bowControlsInitialized) return;
+  bowControlsInitialized = true;
+
+  const slider = document.getElementById('bowSizeSlider');
+  const minusBtn = document.getElementById('bowSizeDecreaseBtn');
+  const plusBtn = document.getElementById('bowSizeIncreaseBtn');
+
+  function setBowSize(value){
+    state.bowScale = Math.max(60, Math.min(160, parseInt(value) || 100));
+    if(slider) slider.value = state.bowScale;
+    renderStage();
+  }
+
+  if(slider) slider.addEventListener('input', (e)=> setBowSize(e.target.value));
+  if(minusBtn) minusBtn.addEventListener('click', ()=> setBowSize(state.bowScale - 10));
+  if(plusBtn) plusBtn.addEventListener('click', ()=> setBowSize(state.bowScale + 10));
+}
+
+initBowControls();
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initBowControls);
+}
+
 document.getElementById('wrapperSizeSlider').addEventListener('input', (e)=>{
   state.wrapperScale = parseInt(e.target.value);
   renderStage();
