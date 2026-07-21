@@ -2177,8 +2177,8 @@ function attachDrag(el, stem){
     const dy = point.clientY - startY;
     const pctDx = (dx/rect.width)*100;
     const pctDy = (dy/rect.height)*100;
-    stem.x = Math.max(2,Math.min(98, origXPercent + pctDx));
-    stem.y = Math.max(2,Math.min(98, origYPercent + pctDy));
+    stem.x = origXPercent + pctDx;
+    stem.y = origYPercent + pctDy;
     el.style.left = stem.x+'%';
     el.style.top = stem.y+'%';
     // keep the flower's stem-line glued to the moving head instead of
