@@ -363,7 +363,7 @@
     <!-- PANEL: WRAPPER -->
     <div class="panel" id="panel-wrapper" style="display:none;">
       <h2 class="section-title">Pick a wrapper 🎁</h2>
-      <p class="section-desc">Choose the paper that hugs your bouquet. You can also skip this step.</p>
+      <p class="section-desc">Choose the paper that hugs your bouquet. Resize it with the slider below, and it will stay fixed in place.</p>
       <div class="wrap-grid" id="wrapperGrid"></div>
       <div id="wrapperSizeControl" style="margin-top:16px; display:none;">
         <label style="font-size:13px; font-weight:700; color:var(--moss-deep); display:flex; justify-content:space-between;">
@@ -376,11 +376,17 @@
     <!-- PANEL: BOW -->
     <div class="panel" id="panel-bow" style="display:none;">
       <h2 class="section-title">Add a bow 🎀</h2>
-      <p class="section-desc">A little bow ties the whole look together. Drag it on the stage to reposition, resize with the slider.</p>
+      <p class="section-desc">A little bow ties the whole look together. Resize it with the slider below, and keep it fixed in place.</p>
       <div class="wrap-grid" id="bowGrid"></div>
       <div id="bowSizeControl" style="margin-top:16px; display:none;">
-        <label style="font-size:13px; font-weight:700; color:var(--moss-deep);">Bow size</label>
-        <input type="range" id="bowSizeSlider" min="60" max="160" value="100" style="width:100%;">
+        <label style="font-size:13px; font-weight:700; color:var(--moss-deep); display:flex; justify-content:space-between; align-items:center; gap:8px;">
+          <span>Bow size</span>
+          <span style="display:flex; gap:6px;">
+            <button type="button" id="bowSizeDecreaseBtn" style="width:28px; height:28px; border-radius:50%; background:var(--cream-deep); color:var(--rose-deep); font-weight:800;">−</button>
+            <button type="button" id="bowSizeIncreaseBtn" style="width:28px; height:28px; border-radius:50%; background:var(--cream-deep); color:var(--rose-deep); font-weight:800;">+</button>
+          </span>
+        </label>
+        <input type="range" id="bowSizeSlider" min="60" max="160" value="100" style="width:100%; margin-top:8px;">
       </div>
     </div>
 
@@ -1892,43 +1898,10 @@ function renderStage(){
       const wrapDiv = document.createElement('div');
       wrapDiv.className='stage-wrapper-layer' + (state.selectedWrapper?' selected':'');
       const size = 100 * (state.wrapperScale/100);
-      wrapDiv.style.cssText=`left:${state.wrapperX}%; top:${state.wrapperY}%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:3; pointer-events:auto;`;
+      wrapDiv.style.cssText=`left:${state.wrapperX}%; top:${state.wrapperY}%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:3; pointer-events:none;`;
       wrapDiv.dataset.type='wrapper';
       wrapDiv.innerHTML = renderWrapperCone(w);
       stage.appendChild(wrapDiv);
-      attachWrapperDrag(wrapDiv);
-      wrapDiv.addEventListener('click', (e)=>{
-        e.stopPropagation();
-        state.selectedWrapper = !state.selectedWrapper;
-        state.selectedStemUid = null;
-        renderStage();
-        renderArrangeList();
-      });
-      if(state.selectedWrapper){
-        const controls = document.createElement('div');
-        controls.className='item-controls';
-        controls.style.cssText='position:absolute; top:100%; left:50%; transform:translateX(-50%); margin-top:10px;';
-        controls.innerHTML = `
-          <button data-act="smaller" title="Smaller">−</button>
-          <button data-act="bigger" title="Bigger">+</button>
-          <button data-act="rotL" title="Rotate left">↺</button>
-          <button data-act="rotR" title="Rotate right">↻</button>
-          <button data-act="del" class="remove-btn" title="Remove wrapper">✕ Remove</button>
-        `;
-        wrapDiv.appendChild(controls);
-        controls.addEventListener('click', (e)=>{
-          e.stopPropagation();
-          const act = e.target.closest('button')?.dataset.act;
-          if(!act) return;
-          if(act==='smaller') state.wrapperScale = Math.max(60, state.wrapperScale-10);
-          if(act==='bigger') state.wrapperScale = Math.min(180, state.wrapperScale+10);
-          if(act==='rotL') state.wrapperRot -= 15;
-          if(act==='rotR') state.wrapperRot += 15;
-          if(act==='del'){ state.wrapperId=null; state.selectedWrapper=false; renderWrapperSelection(); showToast('Wrapper removed','🎁'); renderStage(); return; }
-          syncWrapperSizeSlider();
-          renderStage();
-        });
-      }
     }
   }
 
@@ -2018,10 +1991,9 @@ function renderStage(){
       const size = 70 * (state.bowScale/100);
       const bowDiv = document.createElement('div');
       bowDiv.className='stage-bow-layer';
-      bowDiv.style.cssText = `left:${state.bowX}%; top:${state.bowY}%; width:${size}px; height:${size}px; transform:translate(-50%,-50%); z-index:400; pointer-events:auto; cursor:grab; touch-action:none;`;
+      bowDiv.style.cssText = `left:${state.bowX}%; top:${state.bowY}%; width:${size}px; height:${size}px; transform:translate(-50%,-50%); z-index:400; pointer-events:none; cursor:default; touch-action:none;`;
       bowDiv.innerHTML = makeBow(b.color, b.style);
       stage.appendChild(bowDiv);
-      attachBowDrag(bowDiv);
     }
   }
 
@@ -2523,9 +2495,21 @@ function renderBowSelection(){
   });
   document.getElementById('bowSizeControl').style.display = state.bowId ? 'block' : 'none';
 }
-document.getElementById('bowSizeSlider').addEventListener('input', (e)=>{
-  state.bowScale = parseInt(e.target.value);
+function setBowSize(value){
+  state.bowScale = Math.max(60, Math.min(160, parseInt(value) || 100));
+  const slider = document.getElementById('bowSizeSlider');
+  if(slider) slider.value = state.bowScale;
   renderStage();
+}
+
+document.getElementById('bowSizeSlider').addEventListener('input', (e)=>{
+  setBowSize(e.target.value);
+});
+document.getElementById('bowSizeDecreaseBtn').addEventListener('click', ()=>{
+  setBowSize(state.bowScale - 10);
+});
+document.getElementById('bowSizeIncreaseBtn').addEventListener('click', ()=>{
+  setBowSize(state.bowScale + 10);
 });
 document.getElementById('wrapperSizeSlider').addEventListener('input', (e)=>{
   state.wrapperScale = parseInt(e.target.value);
