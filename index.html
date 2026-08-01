@@ -299,6 +299,59 @@
     position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#c9b6bd; text-align:center; pointer-events:none;
   }
   .stage-empty span{ font-size:44px; margin-bottom:8px; }
+
+  body.theme-friendship{ background: radial-gradient(circle at 15% 10%, #FFF4C2 0%, transparent 45%), radial-gradient(circle at 85% 90%, #DDF4FF 0%, transparent 45%), var(--cream); }
+  body.theme-love{ background: radial-gradient(circle at 15% 10%, #FFE7EF 0%, transparent 45%), radial-gradient(circle at 85% 90%, #F6E7FF 0%, transparent 45%), var(--cream); }
+  body.theme-friendship .topbar{ border-color: rgba(242,194,48,0.2); }
+  body.theme-love .topbar{ border-color: rgba(232,135,154,0.2); }
+  body.theme-friendship .btn-primary{ box-shadow: 0 10px 24px rgba(242,194,48,0.26); }
+  body.theme-love .btn-primary{ box-shadow: 0 10px 24px rgba(232,135,154,0.26); }
+  body.theme-friendship .bouquet-stage-wrap{ box-shadow: inset 0 0 0 1px rgba(242,194,48,0.24), 0 22px 50px rgba(242,194,48,0.14); }
+  body.theme-love .bouquet-stage-wrap{ box-shadow: inset 0 0 0 1px rgba(232,135,154,0.24), 0 22px 50px rgba(232,135,154,0.14); }
+
+  .theme-shell{ width:min(100%, 1100px); padding:24px; display:flex; align-items:center; justify-content:center; min-height:100vh; }
+  .theme-hero{ width:100%; padding:34px; border-radius:34px; background:rgba(255,255,255,0.78); backdrop-filter:blur(16px); box-shadow:0 24px 70px rgba(91,58,85,0.15); text-align:center; position:relative; overflow:hidden; }
+  .theme-hero::before{ content:''; position:absolute; inset:-20% 10% auto; height:220px; background:radial-gradient(circle, rgba(232,135,154,0.18), transparent 70%); filter:blur(20px); animation: breathe 4.5s ease-in-out infinite; }
+  .theme-bubble{ width:78px; height:78px; border-radius:50%; margin:0 auto 10px; display:grid; place-items:center; font-size:34px; box-shadow:inset 0 -10px 24px rgba(255,255,255,0.25), 0 16px 30px rgba(232,135,154,0.16); background:linear-gradient(135deg, #fff7d6, #ffd8e6); }
+  .theme-hero h2{ margin:10px 0 6px; color:var(--rose-deep); font-size:clamp(28px,4vw,40px); }
+  .theme-hero p{ margin:0 auto 22px; color:#7a6470; max-width:620px; line-height:1.7; }
+  .theme-options{ display:grid; grid-template-columns:repeat(2, minmax(240px, 1fr)); gap:18px; margin-top:20px; }
+  .theme-card{ background:linear-gradient(145deg, #fff, #fff7f8); border:1.5px solid rgba(194,92,116,0.14); border-radius:24px; padding:20px; text-align:left; position:relative; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; cursor:pointer; }
+  .theme-card:hover{ transform:translateY(-4px); box-shadow:0 18px 32px rgba(91,58,85,0.12); }
+  .theme-card.selected{ border-color:var(--rose-deep); box-shadow:0 18px 40px rgba(194,92,116,0.16); transform:translateY(-4px); }
+  .theme-emoji{ font-size:26px; display:inline-flex; padding:12px; border-radius:16px; background:linear-gradient(135deg, rgba(242,194,48,0.2), rgba(232,135,154,0.2)); }
+  .theme-card h3{ margin:12px 0 6px; color:var(--rose-deep); font-size:22px; }
+  .theme-card p{ margin:0 0 14px; color:#7a6470; font-size:14px; line-height:1.6; }
+  .theme-messages{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  .theme-messages span{ background:var(--cream-deep); color:var(--plum); padding:8px 10px; border-radius:999px; font-size:12.4px; font-weight:700; }
+  .theme-visual{ margin-top:16px; min-height:90px; border-radius:18px; position:relative; overflow:hidden; background:linear-gradient(120deg, rgba(242,194,48,0.14), rgba(232,135,154,0.16)); }
+  .theme-visual::before{ content:'✿'; position:absolute; inset:auto 18px 12px auto; font-size:26px; opacity:0.7; animation: drift 3s ease-in-out infinite; }
+  .theme-visual-friendship::after{ content:'💛'; position:absolute; left:18px; top:16px; font-size:30px; }
+  .theme-visual-love::after{ content:'❤️'; position:absolute; left:18px; top:16px; font-size:30px; }
+  .theme-actions{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:24px; }
+  .theme-message-card{ background:linear-gradient(135deg, rgba(255,247,213,0.7), rgba(255,238,245,0.75)); border:1px solid rgba(194,92,116,0.16); border-radius:16px; padding:12px 14px; margin-top:12px; color:var(--plum); font-size:14px; font-weight:700; }
+  .music-panel, .photo-picker{ margin-top:16px; background:var(--cream); border:1px solid #f0dfe3; border-radius:18px; padding:14px; }
+  .music-panel label, .photo-picker label{ display:block; font-size:13px; font-weight:700; color:var(--moss-deep); margin-bottom:8px; }
+  .music-panel input, .photo-picker input{ width:100%; padding:10px 12px; border-radius:12px; border:1.5px solid #f0dfe3; font:inherit; background:#fff; }
+  .spotify-frame{ margin-top:10px; border-radius:16px; overflow:hidden; min-height:100px; }
+  .spotify-frame iframe{ width:100%; height:110px; border:0; }
+  .music-controls{ display:flex; gap:8px; margin-top:8px; }
+  .music-controls button{ padding:8px 12px; border-radius:999px; font-size:12px; font-weight:700; }
+  .photo-preview{ margin-top:10px; min-height:120px; border-radius:16px; border:1.5px dashed #e9d3dc; display:grid; place-items:center; padding:10px; background:linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,240,245,0.7)); }
+  .photo-preview img{ width:100%; max-width:180px; max-height:180px; object-fit:cover; border-radius:16px; box-shadow:0 10px 24px rgba(91,58,85,0.15); }
+  .photo-preview .empty-state{ padding:16px 10px; }
+  .photo-tag-card{ display:grid; place-items:center; padding:8px; border-radius:18px; background:linear-gradient(135deg, #fff, #fdf1f6); box-shadow:0 12px 24px rgba(91,58,85,0.16); position:relative; }
+  .photo-tag-card::after{ content:''; position:absolute; inset:8px auto auto 50%; width:32px; height:32px; border-radius:50%; background:var(--rose-deep); transform:translateX(-50%); opacity:0.85; }
+  .stage-photo-layer{ pointer-events:none; }
+  .stage-photo-layer .photo-tag-card{ width:100%; height:100%; padding:6px; }
+  .stage-photo-layer img{ width:100%; height:100%; object-fit:cover; border-radius:12px; }
+  .share-music-preview{ margin-bottom:12px; border-radius:16px; overflow:hidden; }
+  .share-music-preview iframe{ width:100%; min-height:96px; border:0; }
+  .receive-music{ margin-top:12px; border-radius:16px; overflow:hidden; }
+  .receive-music iframe{ width:100%; min-height:96px; border:0; }
+
+  @keyframes breathe{ 0%,100%{ transform:translateY(0) scale(1); opacity:0.8; } 50%{ transform:translateY(-8px) scale(1.03); opacity:1; } }
+  @keyframes drift{ 0%,100%{ transform:translateY(0) rotate(0deg); } 50%{ transform:translateY(-4px) rotate(6deg); } }
 </style>
 </head>
 <body>
@@ -313,6 +366,22 @@
     <div class="site-tag">by Tanu Javali</div>
     <p class="site-sub">Design a one-of-a-kind bouquet, wrap it just how you like, tuck in a handwritten note, and send it to someone you love — with a link that unwraps like a real gift.</p>
     <button class="start-btn" id="clickToStart">✨ Click to Start</button>
+  </div>
+</section>
+
+<!-- ============ THEME SCREEN ============ -->
+<section class="screen" id="themeScreen">
+  <div class="theme-shell">
+    <div class="theme-hero">
+      <div class="theme-bubble">💐</div>
+      <h2>Choose your bouquet mood</h2>
+      <p>Pick a signature theme, then build a bouquet that feels personal, charming, and ready to share with a little extra sparkle.</p>
+      <div class="theme-options" id="themeOptions"></div>
+      <div class="theme-actions">
+        <button class="btn btn-ghost" id="themeBackBtn">← Back</button>
+        <button class="btn btn-primary" id="themeContinueBtn">Continue to design →</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -402,6 +471,21 @@
         <div class="char-count"><span id="cardCharCount">0</span>/220</div>
         <input type="text" id="cardFrom" placeholder="From: (e.g. Tanu)" style="margin-top:4px;">
       </div>
+      <div class="music-panel">
+        <label for="musicUrlInput">Add a song from Spotify</label>
+        <input id="musicUrlInput" type="url" placeholder="Paste a Spotify song link" />
+        <div class="music-controls">
+          <button type="button" class="btn btn-ghost" id="musicToggleBtn">Pause song</button>
+        </div>
+        <div class="spotify-frame" id="spotifyFrame"></div>
+      </div>
+      <div class="photo-picker">
+        <label for="photoInput">Add one picture to the bouquet</label>
+        <input id="photoInput" type="file" accept="image/*" />
+        <div class="photo-preview" id="photoPreview">
+          <div class="empty-state">Choose an image from your gallery to attach.</div>
+        </div>
+      </div>
     </div>
 
     <!-- PANEL: SHARE (placeholder inside builder flow; actual share UI on separate screen) -->
@@ -421,6 +505,7 @@
     <h2 style="color:var(--rose-deep); margin-top:0;">Your bouquet is ready! 🌷</h2>
     <div class="share-preview-stage" id="sharePreviewStage"></div>
     <div class="share-note-preview" id="shareNotePreview" style="display:none;"></div>
+    <div class="share-music-preview" id="shareMusicPreview"></div>
     <div class="link-row">
       <input type="text" id="shareLinkInput" readonly value="">
       <button class="copy-btn" id="copyLinkBtn">Copy</button>
@@ -443,6 +528,7 @@
     <div class="from-line" id="receiveFromLine">A gift for you</div>
     <div class="share-preview-stage" id="receivePreviewStage"></div>
     <div class="receive-note" id="receiveNoteBox" style="display:none;"></div>
+    <div class="receive-music" id="receiveMusicPreview"></div>
     <button class="btn btn-primary" style="margin-top:20px;" id="makeOwnBtn">Make my own bouquet 🌷</button>
   </div>
 </section>
@@ -1805,10 +1891,79 @@ const state = {
   cardId: null,
   cardX: 76, cardY: 68,
   cardNote: '', cardTo:'', cardFrom:'',
+  theme: 'friendship',
+  themeMessage: 'Friends make life bloom',
+  musicUrl: '',
+  musicPlaying: true,
+  photoDataUrl: '',
   selectedStemUid: null,
   selectedWrapper: false,
   zCounter: 1,
 };
+
+const THEME_OPTIONS = [
+  {
+    id:'friendship',
+    title:'Friendship Bouquet',
+    emoji:'💛',
+    blurb:'Bright, cheerful, and full of joyful blossoms for someone treasured.',
+    accent:'#F2C230',
+    messages:['Friends make life bloom', 'A bouquet for someone special.']
+  },
+  {
+    id:'love',
+    title:'Love Bouquet',
+    emoji:'❤️',
+    blurb:'Romantic roses and delicate petals for heartfelt moments and soft affection.',
+    accent:'#E8879A',
+    messages:['Made with love', 'Every flower tells a love story.']
+  }
+];
+
+function applyThemeClass(){
+  document.body.classList.remove('theme-friendship','theme-love');
+  if(state.theme==='love') document.body.classList.add('theme-love');
+  else document.body.classList.add('theme-friendship');
+}
+
+function renderThemeOptions(){
+  const wrap = document.getElementById('themeOptions');
+  if(!wrap) return;
+  wrap.innerHTML = THEME_OPTIONS.map(theme=>`
+    <div class="theme-card ${state.theme===theme.id?'selected':''}" data-theme="${theme.id}">
+      <div class="theme-emoji" style="background:linear-gradient(135deg, ${theme.accent}22, ${theme.accent}33);">${theme.emoji}</div>
+      <h3>${theme.title}</h3>
+      <p>${theme.blurb}</p>
+      <div class="theme-messages">
+        ${theme.messages.map(msg=>`<span>${msg}</span>`).join('')}
+      </div>
+      <div class="theme-visual ${theme.id==='love'?'theme-visual-love':'theme-visual-friendship'}"></div>
+    </div>
+  `).join('');
+  wrap.querySelectorAll('.theme-card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      state.theme = card.dataset.theme;
+      state.themeMessage = THEME_OPTIONS.find(t=>t.id===state.theme)?.messages[0] || 'A bouquet for someone special.';
+      renderThemeOptions();
+      applyThemeClass();
+      renderStage();
+      showToast(state.theme==='love' ? 'Love theme selected ❤️' : 'Friendship theme selected 💛', '✨');
+    });
+  });
+}
+
+function renderThemeDetails(){
+  const selected = THEME_OPTIONS.find(t=>t.id===state.theme) || THEME_OPTIONS[0];
+  const messageCard = document.querySelector('.theme-message-card');
+  if(messageCard){ messageCard.remove(); }
+  const hero = document.querySelector('.theme-hero');
+  if(hero){
+    const note = document.createElement('div');
+    note.className='theme-message-card';
+    note.innerHTML = `<strong>${selected.title}</strong><br>${selected.messages[0]} • ${selected.messages[1]}`;
+    hero.appendChild(note);
+  }
+}
 
 const STEP_ORDER = ['flowers','arrange','wrapper','bow','card','share'];
 
@@ -1870,8 +2025,21 @@ function goToScreen(id){
 }
 
 document.getElementById('clickToStart').addEventListener('click', ()=>{
+  goToScreen('themeScreen');
+  renderThemeOptions();
+  renderThemeDetails();
+  applyThemeClass();
+  showToast('Choose a beautiful theme first ✨', '💐');
+});
+
+document.getElementById('themeBackBtn').addEventListener('click', ()=>{
+  goToScreen('landing');
+});
+
+document.getElementById('themeContinueBtn').addEventListener('click', ()=>{
   goToScreen('builder');
   setStep('flowers');
+  applyThemeClass();
   showToast('Let\'s build something beautiful!', '💐');
 });
 
@@ -2038,9 +2206,43 @@ function generateFillerLeaves(stems) {
 /* =========================================================================
    STAGE RENDERING (bouquet canvas) — used both in builder + share/receive previews
    ========================================================================= */
+function buildPhotoTagMarkup(sourceState = state){
+  const photoUrl = sourceState?.photoDataUrl;
+  if(!photoUrl) return '';
+  return `
+    <div style="position:relative; width:100%; aspect-ratio:1/1; transform:rotate(-4deg); filter:drop-shadow(0 8px 14px rgba(0,0,0,0.24));">
+      <svg viewBox="0 0 40 26" style="position:absolute; top:-17px; left:3px; width:40px; height:26px; z-index:2; overflow:visible;">
+        <path d="M9 24 Q20 -6 31 24" stroke="#B8865B" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.9"/>
+      </svg>
+      <div style="position:relative; background:transparent; width:100%; height:100%;">
+        <div style="width:100%; height:100%; border-radius:14px; border:2px solid rgba(194,92,116,0.25); background:linear-gradient(135deg,#fff,#fdf1f6); padding:6px; box-sizing:border-box;">
+          <img src="${photoUrl}" alt="Bouquet memory" style="width:100%; height:100%; object-fit:cover; border-radius:10px; display:block;" />
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function buildCombinedCardAndPhotoMarkup(sourceState = state){
+  const hasCard = Boolean(sourceState?.cardId);
+  const hasPhoto = Boolean(sourceState?.photoDataUrl);
+  if(!hasCard && !hasPhoto) return '';
+  if(!hasCard) return buildPhotoTagMarkup(sourceState);
+  if(!hasPhoto) return buildStageCardMarkup(sourceState);
+  return `
+    <div style="position:relative; width:100%; height:auto;">
+      ${buildStageCardMarkup(sourceState)}
+      <div style="position:absolute; left:72%; top:14%; width:42%; max-width:112px; aspect-ratio:1/1; z-index:5; transform:rotate(8deg) scale(1.06);">
+        ${buildPhotoTagMarkup(sourceState)}
+      </div>
+    </div>
+  `;
+}
+
 function renderStage(){
   const stage = document.getElementById('bouquetStage');
   const emptyMsg = document.getElementById('stageEmptyMsg');
+  const selectedTheme = THEME_OPTIONS.find(t=>t.id===state.theme) || THEME_OPTIONS[0];
   // clear
   stage.innerHTML = '';
   if(emptyMsg) stage.appendChild(emptyMsg);
@@ -2151,17 +2353,16 @@ function renderStage(){
     }
   }
 
-  // tagged card — centered directly over the wrapper's front face so it
-  // reads as tied onto the bouquet rather than floating beside it; draggable
-  // like the bow and flowers.
-  if(state.cardId){
+  // pinned card — tagged directly onto the wrapper's front face (not
+  // floating off to the side), angled like a real gift tag pinned through
+  // the paper, with the actual note text printed on it.
+  if(state.cardId || state.photoDataUrl){
     const cardDiv = document.createElement('div');
     cardDiv.className='stage-card-layer';
     cardDiv.id = 'stageCardLayer';
-    cardDiv.style.cssText = `left:${state.cardX}%; top:${state.cardY}%; width:30%; max-width:106px; transform:translate(-50%,-50%); z-index:450; pointer-events:auto; cursor:grab; touch-action:none;`;
-    cardDiv.innerHTML = buildStageCardMarkup();
+    cardDiv.style.cssText = `left:60%; top:64%; width:${state.photoDataUrl && state.cardId ? 38 : 32}%; max-width:${state.photoDataUrl && state.cardId ? 132 : 112}px; z-index:450;`;
+    cardDiv.innerHTML = buildCombinedCardAndPhotoMarkup(state);
     stage.appendChild(cardDiv);
-    attachCardDrag(cardDiv);
   }
 
   stage.onclick = ()=>{ state.selectedStemUid=null; renderStage(); renderArrangeList(); };
@@ -2702,6 +2903,7 @@ function renderCardSelection(){
     });
   });
 }
+
 document.getElementById('cardNote').addEventListener('input', (e)=>{
   state.cardNote = e.target.value;
   document.getElementById('cardCharCount').textContent = e.target.value.length;
@@ -2715,6 +2917,71 @@ document.getElementById('cardFrom').addEventListener('input', (e)=>{
   state.cardFrom = e.target.value;
   refreshStageCardFace();
 });
+
+document.getElementById('musicUrlInput').addEventListener('input', (e)=>{
+  state.musicUrl = e.target.value.trim();
+  renderSpotifyPreview();
+});
+
+document.getElementById('musicToggleBtn').addEventListener('click', ()=>{
+  state.musicPlaying = !state.musicPlaying;
+  renderSpotifyPreview();
+});
+
+function buildSpotifyEmbedUrl(url){
+  if(!url) return '';
+  const match = url.match(/open\.spotify\.com\/(track|album|playlist|artist|episode)\/([a-zA-Z0-9]+)/i);
+  if(match){
+    return `https://open.spotify.com/embed/${match[1]}/${match[2]}?autoplay=1&theme=0`;
+  }
+  return url;
+}
+
+function renderSpotifyPreview(){
+  const frame = document.getElementById('spotifyFrame');
+  const btn = document.getElementById('musicToggleBtn');
+  if(!frame) return;
+  if(!state.musicUrl){ frame.innerHTML=''; if(btn) btn.textContent='Pause song'; return; }
+  const embedUrl = buildSpotifyEmbedUrl(state.musicUrl);
+  frame.innerHTML = state.musicPlaying ? `<iframe src="${embedUrl}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>` : '<div class="empty-state">Music paused — tap to resume.</div>';
+  if(btn){ btn.textContent = state.musicPlaying ? 'Pause song' : 'Play song'; }
+}
+
+function renderShareMusicPreview(){
+  const shareMusic = document.getElementById('shareMusicPreview');
+  if(!shareMusic) return;
+  if(!state.musicUrl){ shareMusic.innerHTML=''; return; }
+  const embedUrl = buildSpotifyEmbedUrl(state.musicUrl);
+  shareMusic.innerHTML = `<div class="share-music-preview"><iframe src="${embedUrl}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe></div>`;
+}
+
+function renderReceiverMusicPreview(giftState){
+  const receiverMusic = document.getElementById('receiveMusicPreview');
+  if(!receiverMusic) return;
+  if(!giftState.musicUrl){ receiverMusic.innerHTML=''; return; }
+  const embedUrl = buildSpotifyEmbedUrl(giftState.musicUrl);
+  receiverMusic.innerHTML = `<iframe src="${embedUrl}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
+}
+
+document.getElementById('photoInput').addEventListener('change', (e)=>{
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    state.photoDataUrl = reader.result;
+    renderPhotoPreview();
+    renderStage();
+    showToast('Photo attached to your bouquet ✨', '📸');
+  };
+  reader.readAsDataURL(file);
+});
+
+function renderPhotoPreview(){
+  const preview = document.getElementById('photoPreview');
+  if(!preview) return;
+  if(!state.photoDataUrl){ preview.innerHTML = '<div class="empty-state">Choose an image from your gallery to attach.</div>'; return; }
+  preview.innerHTML = `<img src="${state.photoDataUrl}" alt="Selected bouquet memory" />`;
+}
 
 /* =========================================================================
    SHARE SCREEN
@@ -2800,10 +3067,10 @@ function cloneStageInto(targetId){
     }
   }
   // Card
-  if(state.cardId){
+  if(state.cardId || state.photoDataUrl){
     const d = document.createElement('div');
-    d.style.cssText = `position:absolute; left:${state.cardX}%; top:${state.cardY}%; width:30%; max-width:106px; transform:translate(-50%,-50%); z-index:450;`;
-    d.innerHTML = buildStageCardMarkup();
+    d.style.cssText = `position:absolute; left:${state.cardX}%; top:${state.cardY}%; width:${state.photoDataUrl && state.cardId ? 36 : 30}%; max-width:${state.photoDataUrl && state.cardId ? 144 : 106}px; transform:translate(-50%,-50%); z-index:450;`;
+    d.innerHTML = buildCombinedCardAndPhotoMarkup(state);
     target.appendChild(d);
   }
 }
@@ -2824,6 +3091,25 @@ function generateGiftId(){
   return 'g' + Math.random().toString(36).slice(2,10) + Date.now().toString(36).slice(-4);
 }
 
+function encodeGiftPayload(payload){
+  try {
+    const json = JSON.stringify(payload);
+    return btoa(encodeURIComponent(json).replace(/%([0-9A-F]{2})/g, (_, p1)=>String.fromCharCode(parseInt(p1,16))));
+  } catch (error) {
+    return '';
+  }
+}
+
+function decodeGiftPayload(encoded){
+  try {
+    const json = decodeURIComponent(atob(encoded).split('').map(ch=>'%'+('00'+ch.charCodeAt(0).toString(16)).slice(-2)).join(''));
+    return JSON.parse(json);
+  } catch (error) {
+    console.warn('Could not decode inline gift payload', error);
+    return null;
+  }
+}
+
 let currentGiftId = null;
 
 async function saveGiftAndBuildLink(){
@@ -2832,23 +3118,32 @@ async function saveGiftAndBuildLink(){
     wrapperId: state.wrapperId,
     wrapperX: state.wrapperX, wrapperY: state.wrapperY, wrapperScale: state.wrapperScale, wrapperRot: state.wrapperRot,
     bowId: state.bowId, bowScale: state.bowScale, bowX: state.bowX, bowY: state.bowY,
-    cardId: state.cardId, cardX: state.cardX, cardY: state.cardY, cardNote: state.cardNote, cardTo: state.cardTo, cardFrom: state.cardFrom,
+    cardId: state.cardId, cardNote: state.cardNote, cardTo: state.cardTo, cardFrom: state.cardFrom,
     createdAt: Date.now(),
   };
   const giftId = currentGiftId || generateGiftId();
   currentGiftId = giftId;
 
-  const giftRef = window.firebaseDoc(window.db, "bouquets", giftId);
-  await window.firebaseSetDoc(giftRef, payload);
+  if(window.storage && window.storage.set){
+    // shared=true: the RECEIVER opening this link is a different session/
+    // device than the sender, so the record must be readable by anyone,
+    // not just saved privately to the sender's own storage.
+    await window.storage.set('gift:' + giftId, JSON.stringify(payload), true);
+  }
 
   const url = new URL(window.location.href.split('#')[0].split('?')[0]);
   url.searchParams.set('gift', giftId);
+  const compactPayload = encodeGiftPayload(payload);
+  if(compactPayload && compactPayload.length < 1200){
+    url.hash = `giftData=${compactPayload}`;
+  }
   return url.toString();
 }
 
 async function goToShareScreen(){
   goToScreen('shareScreen');
   cloneStageInto('sharePreviewStage');
+  renderShareMusicPreview();
   const notePrev = document.getElementById('shareNotePreview');
   if(state.cardId && (state.cardNote || state.cardTo || state.cardFrom)){
     notePrev.style.display='block';
@@ -2894,11 +3189,11 @@ function shareVia(platform){
     showToast('Hang on, still preparing your link…', '⏳');
     return;
   }
-  const text = encodeURIComponent(`🌷 I made you a bouquet on Blooms & Bows! Open your gift: ${link}`);
+  const message = `🌷 I made you a bouquet on Blooms & Bows! Open your gift here: ${link}`;
+  const text = encodeURIComponent(message);
   let shareUrl='';
   if(platform==='whatsapp') shareUrl = `https://wa.me/?text=${text}`;
   if(platform==='instagram'){
-    // Instagram has no direct web share-link API for DMs; copy link + open Instagram
     navigator.clipboard && navigator.clipboard.writeText(link);
     showToast('Link copied — paste it into your Instagram DM or story!','📸');
     window.open('https://www.instagram.com/', '_blank');
@@ -2936,30 +3231,6 @@ function revealReceiverBouquet(giftState, opts={}){
   } else {
     noteBox.style.display='none';
   }
-  const card = document.querySelector('#receiveScreen .receive-card');
-  if(card){
-    card.classList.remove('gift-reveal');
-    void card.offsetWidth;
-    card.classList.add('gift-reveal');
-  }
-  if(isDirectOpen){
-    showToast('Your bouquet has arrived! 💐','🎁');
-  } else {
-    showToast('Enjoy your bouquet! 💕','🌷');
-  }
-}
-
-function showReceiverExperience(giftState, opts={}){
-  const { isDirectOpen=false } = opts;
-  goToScreen('receiveScreen');
-  document.getElementById('receiveFromLine').textContent = giftState.cardFrom ? `A bouquet from ${giftState.cardFrom} 💐` : 'Someone sent you a bouquet 💐';
-  document.getElementById('receivePreviewStage').innerHTML = `
-    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center; color:#b09aa2; gap:10px; padding:20px;">
-      <span style="font-size:48px;">🎁</span>
-      <span style="font-size:14px;">A gift is waiting for you.</span>
-    </div>
-  `;
-  document.getElementById('receiveNoteBox').style.display='none';
   showModal({
     emoji:'🎁',
     title:'You have a gift waiting for you!',
@@ -3021,12 +3292,17 @@ function cloneStageIntoWithData(targetId, data){
       target.appendChild(d);
     }
   }
-  // Card
-  if(data.cardId){
+  if(data.cardId || data.photoDataUrl){
     const d = document.createElement('div');
-    d.style.cssText = `position:absolute; left:${data.cardX||76}%; top:${data.cardY||68}%; width:30%; max-width:106px; transform:translate(-50%,-50%); z-index:450;`;
-    d.innerHTML = buildStageCardMarkup(data);
+    d.style.cssText = `position:absolute; left:60%; top:64%; width:${data.photoDataUrl && data.cardId ? 38 : 32}%; max-width:${data.photoDataUrl && data.cardId ? 132 : 112}px; z-index:450;`;
+    d.innerHTML = buildCombinedCardAndPhotoMarkup(data);
     target.appendChild(d);
+  }
+  if(data.themeMessage){
+    const message = document.createElement('div');
+    message.style.cssText = `position:absolute; left:50%; top:8%; transform:translateX(-50%); z-index:480; padding:10px 14px; border-radius:999px; background:rgba(255,255,255,0.85); color:${data.theme==='love'?'#E8879A':'#F2C230'}; font-weight:800; font-size:13px; box-shadow:0 8px 18px rgba(91,58,85,0.12);`;
+    message.textContent = data.themeMessage;
+    target.appendChild(message);
   }
 }
 
@@ -3062,6 +3338,38 @@ function showGiftNotFoundState(){
   document.getElementById('receiveNoteBox').style.display='none';
 }
 
+async function loadGiftData(giftId){
+  try {
+    const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+    const encodedGift = hashParams.get('giftData');
+    if(encodedGift){
+      const decoded = decodeGiftPayload(encodedGift);
+      if(decoded) return decoded;
+    }
+  } catch (error) {
+    console.warn('Gift data in URL hash could not be decoded.', error);
+  }
+
+  try {
+    if(window.db && window.firebaseDoc && window.firebaseGetDoc){
+      const giftRef = window.firebaseDoc(window.db, "bouquets", giftId);
+      const snap = await window.firebaseGetDoc(giftRef);
+      if(snap.exists()) return snap.data();
+    }
+  } catch (error) {
+    console.warn('Firebase load unavailable, trying browser storage.', error);
+  }
+
+  try {
+    const stored = window.localStorage.getItem(`bouquet:${giftId}`);
+    if(stored) return JSON.parse(stored);
+  } catch (error) {
+    console.warn('Local storage load failed', error);
+  }
+
+  return null;
+}
+
 async function checkForSharedGift(){
   const params = new URLSearchParams(window.location.search);
   const giftId = params.get('gift');
@@ -3069,20 +3377,22 @@ async function checkForSharedGift(){
 
   showReceiveLoadingState();
 
-try{
-    const giftRef = window.firebaseDoc(window.db, "bouquets", giftId);
-    const snap = await window.firebaseGetDoc(giftRef);
+  if(!window.storage || !window.storage.get){
+    console.warn('Storage API unavailable — cannot load shared gift');
+    showGiftNotFoundState();
+    return true;
+  }
 
-    if(!snap.exists()){
-        showGiftNotFoundState();
-        return true;
+  try{
+    const result = await window.storage.get('gift:' + giftId, true);
+    if(!result || !result.value){
+      showGiftNotFoundState();
+      return true;
     }
-
-    const decoded = snap.data();
-    showReceiverExperience(decoded, { isDirectOpen:true });
-
-}catch(e){
-    console.error("Error loading bouquet:", e);
+    const decoded = JSON.parse(result.value);
+    showReceiverExperience(decoded);
+  }catch(e){
+    console.warn('Could not load gift payload', e);
     showGiftNotFoundState();
 }
   return true;
@@ -3101,6 +3411,13 @@ async function boot(){
   updateFlowerCountChip();
   renderStage();
   renderBottomActions();
+
+  applyThemeClass();
+  renderThemeOptions();
+  renderThemeDetails();
+  renderPhotoPreview();
+  renderSpotifyPreview();
+  renderShareMusicPreview();
 
   const hadGift = await checkForSharedGift();
   if(!hadGift){
