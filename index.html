@@ -215,6 +215,17 @@
   /* --- flower/leaf on stage --- */
   .stage-item{ position:absolute; cursor:grab; touch-action:none; transform-origin:center bottom; will-change:transform; transition:transform .22s ease, filter .22s ease; }
   .stage-item.dragging{ cursor:grabbing; z-index:999 !important; }
+  #bouquetStage{ touch-action:none; }
+  .stage-sparkles{ pointer-events:none; }
+  @media (max-width:680px){
+    .stage-sparkles{ display:none; }
+    .stage-item .flower-visual{ animation:none !important; }
+    .stage-item.preview .flower-visual{ animation:none !important; }
+    .stage-item .flower-visual::before{ display:none; }
+  }
+  #bouquetStage{ touch-action:none; }
+  .stage-item, .stage-wrapper-layer, .stage-bow-layer, .stage-card-layer{ will-change:transform, left, top; }
+  .stage-bow-layer{ pointer-events:none; }
   .stage-item .flower-visual{ width:100%; height:100%; position:relative; display:block; transform-origin:center center; animation:flowerSway 4.4s ease-in-out infinite; }
   .stage-item .flower-visual::before{ content:''; position:absolute; inset:8% 10%; border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,0.72) 0%, rgba(255,192,212,0.22) 38%, transparent 72%); filter:blur(8px); opacity:0.55; pointer-events:none; }
   .stage-item .flower-visual svg{ width:100%; height:100%; display:block; overflow:visible; animation:petalOpen 2.8s ease-in-out infinite alternate; }
@@ -328,8 +339,9 @@
   /* responsive */
   @media (max-width:900px){
     .builder-body{ flex-direction:column; }
-    .panel{ max-width:100%; position:relative; top:0; max-height:none; border-radius:26px 26px 0 0; }
-    .canvas-pane{ padding-top:16px; }
+    .panel{ max-width:100%; position:relative; top:0; max-height:calc(100vh - 170px); border-radius:26px 26px 0 0; }
+    .canvas-pane{ padding-top:16px; padding-bottom:26px; }
+    .bouquet-stage-wrap{ width:min(100%, 420px); }
     .topbar{ flex-direction:column; align-items:flex-start; gap:10px; }
     .steps-nav{ justify-content:flex-start; }
     .share-preview-wrap, .receive-card{ padding:20px; }
@@ -340,6 +352,9 @@
     .item-grid{ grid-template-columns:repeat(auto-fill, minmax(80px,1fr)); }
     .wrap-grid{ grid-template-columns:repeat(auto-fill, minmax(70px,1fr)); }
     .theme-options{ flex-direction:column; gap:14px; }
+    .builder-body{ min-height:auto; }
+    .panel{ max-height:calc(100vh - 160px); }
+    .stage-hint{ font-size:13px; max-width:360px; margin:12px auto 0; }
   }
   @media (prefers-reduced-motion: reduce){
     .petal, .logo-mark{ animation:none !important; }
@@ -2020,7 +2035,7 @@ function renderStage(){
       const wrapDiv = document.createElement('div');
       wrapDiv.className='stage-wrapper-layer' + (state.selectedWrapper?' selected':'');
       const size = 100 * (state.wrapperScale/100);
-      wrapDiv.style.cssText=`left:50%; top:50%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:3; pointer-events:auto;`;
+      wrapDiv.style.cssText=`left:${state.wrapperX}%; top:${state.wrapperY}%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:3; pointer-events:auto;`;
       wrapDiv.dataset.type='wrapper';
       wrapDiv.innerHTML = renderWrapperCone(w);
       stage.appendChild(wrapDiv);
@@ -2134,21 +2149,26 @@ function renderStage(){
       const overlapDiv = document.createElement('div');
       overlapDiv.className='stage-wrapper-overlap-layer';
       const size = 100 * (state.wrapperScale/100);
-    overlapDiv.style.cssText=`left:50%; top:50%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:9; pointer-events:none;`;
+      overlapDiv.style.cssText=`left:${state.wrapperX}%; top:${state.wrapperY}%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:9; pointer-events:none;`;
+      overlapDiv.innerHTML = renderWrapperCone(w);
+      stage.appendChild(overlapDiv);
+    }
   }
 
-  // bow — sits at the collar where the flowers meet the wrapper, draggable
-  // just like a flower so it can be nudged into place.
+  // bow — fixed at the top-center collar, just below the wrapper edge
   if(state.bowId){
     const b = BOW_CATALOG.find(x=>x.id===state.bowId);
     if(b){
-      const size = 70 * (state.bowScale/100);
+      const size = 90;
+      const wrapperHeight = state.wrapperScale;
+      const bowLeft = state.wrapperId ? state.wrapperX : state.bowX;
+      const bowOffset = Math.round(wrapperHeight * 0.18) - 2;
+      const bowTop = state.wrapperId ? Math.max(16, Math.min(88, state.wrapperY - bowOffset)) : state.bowY;
       const bowDiv = document.createElement('div');
       bowDiv.className='stage-bow-layer';
-      bowDiv.style.cssText = `left:${state.bowX}%; top:${state.bowY}%; width:${size}px; height:${size}px; transform:translate(-50%,-50%); z-index:400; pointer-events:auto; cursor:grab; touch-action:none;`;
+      bowDiv.style.cssText = `left:${bowLeft}%; top:${bowTop}%; width:${size}px; height:${size}px; transform:translate(-50%,-50%); z-index:400; pointer-events:none;`;
       bowDiv.innerHTML = makeBow(b.color, b.style);
       stage.appendChild(bowDiv);
-      attachBowDrag(bowDiv);
     }
   }
 
@@ -2648,7 +2668,7 @@ function renderBowSelection(){
       if(state.bowId) showToast('Bow tied on! 🎀');
     });
   });
-  document.getElementById('bowSizeControl').style.display = state.bowId ? 'block' : 'none';
+  document.getElementById('bowSizeControl').style.display = 'none';
 }
 document.getElementById('bowSizeSlider').addEventListener('input', (e)=>{
   state.bowScale = parseInt(e.target.value);
@@ -2799,7 +2819,7 @@ function cloneStageInto(targetId){
       const d = document.createElement('div');
       d.className='stage-wrapper-layer';
       const size = 100 * (state.wrapperScale/100);
-      d.style.cssText=`position:absolute; left:50%; top:50%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:5;`;
+      d.style.cssText=`position:absolute; left:${state.wrapperX}%; top:${state.wrapperY}%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:5;`;
       d.innerHTML = renderWrapperCone(w);
       target.appendChild(d);
     }
@@ -2838,9 +2858,11 @@ function cloneStageInto(targetId){
   if(state.bowId){
     const b = BOW_CATALOG.find(x=>x.id===state.bowId);
     if(b){
-      const size = 70*(state.bowScale/100);
+      const size = 76;
+      const bowLeft = state.wrapperId ? state.wrapperX : state.bowX;
+      const bowTop = state.wrapperId ? Math.max(10, Math.min(90, state.wrapperY - (state.wrapperScale / 2) + 12)) : state.bowY;
       const d = document.createElement('div');
-      d.style.cssText = `position:absolute; left:${state.bowX}%; top:${state.bowY}%; width:${size}px; height:${size}px; transform:translate(-50%,-50%); z-index:400;`;
+      d.style.cssText = `position:absolute; left:${bowLeft}%; top:${bowTop}%; width:${size}px; height:${size}px; transform:translate(-50%,-50%); z-index:400;`;
       d.innerHTML = makeBow(b.color,b.style);
       target.appendChild(d);
     }
@@ -3054,7 +3076,7 @@ function cloneStageIntoWithData(targetId, data){
       const d = document.createElement('div');
       d.className='stage-wrapper-layer';
       const size = 100 * ((data.wrapperScale||100)/100);
-      d.style.cssText=`position:absolute; left:50%; top:50%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${data.wrapperRot||0}deg); z-index:5;`;
+      d.style.cssText=`position:absolute; left:${data.wrapperX||50}%; top:${data.wrapperY||50}%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${data.wrapperRot||0}deg); z-index:5;`;
       d.innerHTML = renderWrapperCone(w);
       target.appendChild(d);
     }
@@ -3093,9 +3115,15 @@ function cloneStageIntoWithData(targetId, data){
   if(data.bowId){
     const b = BOW_CATALOG.find(x=>x.id===data.bowId);
     if(b){
-      const size = 70*(data.bowScale||100)/100;
+      const size = 90;
+      const bowLeft = data.wrapperId ? (data.wrapperX||50) : (data.bowX||50);
+      const wrapperHeight = data.wrapperScale || 100;
+      const bowOffset = Math.round(wrapperHeight * 0.18) - 2;
+      const bowTop = data.wrapperId
+        ? Math.max(16, Math.min(88, (data.wrapperY||50) - bowOffset))
+        : (data.bowY||40);
       const d = document.createElement('div');
-      d.style.cssText = `position:absolute; left:${data.bowX||50}%; top:${data.bowY||40}%; width:${size}px; height:${size}px; transform:translate(-50%,-50%); z-index:400;`;
+      d.style.cssText = `position:absolute; left:${bowLeft}%; top:${bowTop}%; width:${size}px; height:${size}px; transform:translate(-50%,-50%); z-index:400;`;
       d.innerHTML = makeBow(b.color,b.style);
       target.appendChild(d);
     }
