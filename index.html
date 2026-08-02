@@ -2035,7 +2035,7 @@ function renderStage(){
       const wrapDiv = document.createElement('div');
       wrapDiv.className='stage-wrapper-layer' + (state.selectedWrapper?' selected':'');
       const size = 100 * (state.wrapperScale/100);
-      wrapDiv.style.cssText=`left:${state.wrapperX}%; top:${state.wrapperY}%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:3; pointer-events:auto;`;
+      wrapDiv.style.cssText=`left:50%; top:50%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:3; pointer-events:auto;`;
       wrapDiv.dataset.type='wrapper';
       wrapDiv.innerHTML = renderWrapperCone(w);
       stage.appendChild(wrapDiv);
@@ -2149,10 +2149,7 @@ function renderStage(){
       const overlapDiv = document.createElement('div');
       overlapDiv.className='stage-wrapper-overlap-layer';
       const size = 100 * (state.wrapperScale/100);
-      overlapDiv.style.cssText=`left:${state.wrapperX}%; top:${state.wrapperY}%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:9; pointer-events:none;`;
-      overlapDiv.innerHTML = renderWrapperCone(w);
-      stage.appendChild(overlapDiv);
-    }
+    overlapDiv.style.cssText=`left:50%; top:50%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:9; pointer-events:none;`;
   }
 
   // bow — fixed at the top-center collar, just below the wrapper edge
@@ -2819,7 +2816,7 @@ function cloneStageInto(targetId){
       const d = document.createElement('div');
       d.className='stage-wrapper-layer';
       const size = 100 * (state.wrapperScale/100);
-      d.style.cssText=`position:absolute; left:${state.wrapperX}%; top:${state.wrapperY}%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:5;`;
+      d.style.cssText=`position:absolute; left:50%; top:50%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${state.wrapperRot}deg); z-index:5;`;
       d.innerHTML = renderWrapperCone(w);
       target.appendChild(d);
     }
@@ -3076,7 +3073,7 @@ function cloneStageIntoWithData(targetId, data){
       const d = document.createElement('div');
       d.className='stage-wrapper-layer';
       const size = 100 * ((data.wrapperScale||100)/100);
-      d.style.cssText=`position:absolute; left:${data.wrapperX||50}%; top:${data.wrapperY||50}%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${data.wrapperRot||0}deg); z-index:5;`;
+      d.style.cssText=`position:absolute; left:50%; top:50%; width:${size}%; aspect-ratio:1; transform:translate(-50%,-50%) rotate(${data.wrapperRot||0}deg); z-index:5;`;
       d.innerHTML = renderWrapperCone(w);
       target.appendChild(d);
     }
